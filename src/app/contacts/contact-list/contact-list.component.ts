@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Contact } from '../contact.model';
+import { ContactItemComponent } from '../contact-item/contact-item.component';
 
 @Component({
   selector: 'cms-contact-list',
