@@ -13,7 +13,11 @@
   <div class="panel-body">
     <div class="row">
       <div class="col-xs-12">
-        <cms-contact-item></cms-contact-item>
+        <cms-contact-item
+          *ngFor="let contact of contacts"
+          [contact]="contact"
+          (contactSelected)="onSelected(contact)"
+        ></cms-contact-item>
       </div>
     </div>
   </div>
