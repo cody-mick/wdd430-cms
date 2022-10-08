@@ -20,21 +20,21 @@ export class DocumentListComponent implements OnInit {
       '2',
       'Test Doc 2',
       'The second test document',
-      'www.google.com',
+      'www.byui.edu',
       null
     ),
     new Document(
       '3',
       'Test Doc 3',
       'The third test document',
-      'www.google.com',
+      'www.walmart.com',
       null
     ),
     new Document(
       '4',
       'Test Doc 4',
       'The fourth test document',
-      'www.google.com',
+      'www.target.com',
       null
     ),
   ];
