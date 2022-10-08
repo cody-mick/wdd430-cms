@@ -37,6 +37,13 @@ export class DocumentListComponent implements OnInit {
       'www.target.com',
       []
     ),
+    new Document(
+      '5',
+      'Test Doc 5',
+      'The fourth test document',
+      'www.target.com',
+      []
+    ),
   ];
 
   constructor() {}
