@@ -19,6 +19,9 @@ export class ContactService {
   }
 
   getContact(id: string) {
-    this.contacts.filter((c) => c.id === id);
+    for (let i = 0; i < this.contacts.length; i++) {
+      if (this.contacts[i].id === id) return this.contacts[i];
+    }
+    return null;
   }
 }
