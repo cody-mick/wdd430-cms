@@ -19,6 +19,9 @@ export class DocumentService {
   }
 
   getDocument(id: string) {
-    this.documents.filter((d) => d.id === id);
+    for (let i = 0; i < this.documents.length; i++) {
+      if (this.documents[i].id === id) return this.documents[i];
+    }
+    return null;
   }
 }
