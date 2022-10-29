@@ -8,7 +8,7 @@ import { Subject } from 'rxjs';
 })
 export class DocumentService {
   documentSelectedEvent = new EventEmitter<Document>();
-  documentChangedEvent = new EventEmitter<Document[]>();
+  // documentChangedEvent = new EventEmitter<Document[]>();
 
   documentListChangedEvent = new Subject<Document[]>();
 
