@@ -27,7 +27,11 @@ export class ContactService {
 
   getContact(id: string) {
     for (let i = 0; i < this.contacts.length; i++) {
-      if (this.contacts[i].id === id) return this.contacts[i];
+      // if (this.contacts[i].id === id) return this.contacts[i];
+      const element = this.contacts[i];
+      if (element.id === id) {
+        return element;
+      }
     }
     return null;
   }

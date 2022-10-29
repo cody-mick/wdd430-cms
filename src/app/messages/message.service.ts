@@ -20,7 +20,11 @@ export class MessageService {
 
   getMessage(id: string) {
     for (let i = 0; i < this.messages.length; i++) {
-      if (this.messages[i].id === id) return this.messages[i];
+      // if (this.messages[i].id === id) return this.messages[i];
+      const element = this.messages[i];
+      if (element.id === id) {
+        return element;
+      }
     }
     return null;
   }
