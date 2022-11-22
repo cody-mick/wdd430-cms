@@ -5,14 +5,14 @@ var http = require("http");
 var bodyParser = require("body-parser");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
-var dotenv = require('dotenv')
+var dotenv = require("dotenv");
 var mongoose = require("mongoose");
 
 // import the routing file to handle the default (index) route
 var index = require("./server/routes/app");
 
 // configure dotenv variables
-dotenv.config()
+dotenv.config();
 
 // ... ADD CODE TO IMPORT YOUR ROUTING FILES HERE ...
 const messageRoutes = require("./server/routes/messages");
