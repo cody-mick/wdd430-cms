@@ -21,7 +21,6 @@ router.get("/", (req, res, next) => {
 
 router.post("/", (req, res, next) => {
   const maxDocumentId = sequenceGenerator.nextId("documents");
-  console.log("MAX DOC ID: ", maxDocumentId);
 
   const document = new Document({
     id: maxDocumentId,
@@ -52,6 +51,9 @@ router.put("/:id", (req, res, next) => {
       document.name = req.body.name;
       document.description = req.body.description;
       document.url = req.body.url;
+
+      console.log(req.body);
+      console.log("Document to update: ", document);
 
       Document.updateOne({ id: req.params.id }, document)
         .then((result) => {

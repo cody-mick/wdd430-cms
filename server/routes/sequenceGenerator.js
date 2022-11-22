@@ -14,8 +14,6 @@ function SequenceGenerator() {
       });
     }
 
-    console.log(sequence);
-
     sequenceId = sequence._id;
     maxDocumentId = sequence.maxDocumentId;
     maxMessageId = sequence.maxMessageId;
