@@ -5,10 +5,14 @@ var http = require("http");
 var bodyParser = require("body-parser");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
+var dotenv = require('dotenv')
 var mongoose = require("mongoose");
 
 // import the routing file to handle the default (index) route
 var index = require("./server/routes/app");
+
+// configure dotenv variables
+dotenv.config()
 
 // ... ADD CODE TO IMPORT YOUR ROUTING FILES HERE ...
 const messageRoutes = require("./server/routes/messages");
@@ -21,8 +25,11 @@ mongoose.connect(
   `mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@cluster0.dpz94eu.mongodb.net/?retryWrites=true&w=majority`,
   { useNewUrlParser: true },
   (err, res) => {
-    if (err) console.log("Connection failed: ", err);
-    console.log("Successfully connected to database!");
+    if (err) {
+      console.log("Connection failed: ", err);
+    } else {
+      console.log("Successfully connected to database!");
+    }
   }
 );
 
