@@ -4,20 +4,19 @@ const sequenceGenerator = require("./sequenceGenerator");
 const Document = require("../models/document");
 
 router.get("/", (req, res, next) => {
-  Document.find().then((documents) => {
-    res
-      .status(200)
-      .json({
+  Document.find({})
+    .then((documents) => {
+      res.status(200).json({
         message: "Documents fetched successfully!",
         documents: documents,
-      })
-      .catch((error) => {
-        res.status(500).json({
-          message: "An error has occurred",
-          error: error,
-        });
       });
-  });
+    })
+    .catch((error) => {
+      res.status(500).json({
+        message: "An error has occurred",
+        error: error,
+      });
+    });
 });
 
 router.post("/", (req, res, next) => {

@@ -20,7 +20,7 @@ export class MessageService {
   getMessages() {
     // return this.messages.slice();
     return this.http
-      .get('https://wdd430-cms-5ecaa-default-rtdb.firebaseio.com/messages.json')
+      .get("http://localhost:3000/messages")
       .subscribe(
         (messages: Message[]) => {
           this.messages = [...messages];
@@ -67,9 +67,15 @@ export class MessageService {
   }
 
   addMessage(message: Message) {
-    this.messages.push(message);
-    // this.messageChangedEvent.emit(this.messages.slice());
-    this.storeMessages(this.messages.slice());
+    if (!message) return
+    message.id = "";
+    const headers = new HttpHeaders({'Content-Type': 'application/json'})
+    this.http.post<{}>("http://localhost:3000/messages/" + message, {headers: headers})
+      .subscribe(responseData => {
+        this.messages.push(message);
+        // this.messageChangedEvent.emit(this.messages.slice());
+        this.storeMessages(this.messages.slice());
+      })
   }
 
   getMaxId(): number {

@@ -25,7 +25,7 @@ export class ContactService {
   getContacts() {
     // return this.contacts.slice();
     return this.http
-      .get('https://wdd430-cms-5ecaa-default-rtdb.firebaseio.com/contacts.json')
+      .get('http://localhost:3000/contacts')
       .subscribe(
         (contacts: Contact[]) => {
           this.contacts = [...contacts];
@@ -79,10 +79,14 @@ export class ContactService {
     if (pos < 0) {
       return;
     }
-    this.contacts.splice(pos, 1);
-    let contactsListClone = this.contacts.slice();
-    // this.contactListChangedEvent.next(contactsListClone);
-    this.storeContacts(contactsListClone);
+
+    this.http.delete('http://localhost:3000/contacts/' + contact.id)
+      .subscribe(response => {
+        this.contacts.splice(pos, 1);
+        let contactsListClone = this.contacts.slice();
+        // this.contactListChangedEvent.next(contactsListClone);
+        this.storeContacts(contactsListClone);
+      })
   }
 
   getMaxId(): number {
@@ -99,12 +103,18 @@ export class ContactService {
 
   addContact(newContact: Contact) {
     if (!newContact) return;
-    this.maxContactId++;
-    newContact.id = this.maxContactId.toString();
-    this.contacts.push(newContact);
-    let contactsListClone = this.contacts.slice();
-    // this.contactListChangedEvent.next(contactsListClone);
-    this.storeContacts(contactsListClone);
+    newContact.id = "";
+    const headers = new HttpHeaders({'Content-Type': 'application/json'})
+    this.http.post<{message: string, contact: Contact}>('http://localhost:3000/contacts', newContact, {headers: headers})
+      .subscribe(responseData => {
+        this.contacts.push(newContact);
+        let contactsListClone = this.contacts.slice();
+        // this.contactListChangedEvent.next(contactsListClone);
+        this.storeContacts(contactsListClone);
+
+      })
+    // this.maxContactId++;
+    // newContact.id = this.maxContactId.toString();
   }
 
   updateContact(originalContact: Contact, newContact: Contact) {
@@ -112,9 +122,13 @@ export class ContactService {
     let pos = this.contacts.indexOf(originalContact);
     if (pos < 0) return;
     newContact.id = originalContact.id;
-    this.contacts[pos] = newContact;
-    let contactsListClone = this.contacts.slice();
-    // this.contactListChangedEvent.next(contactsListClone);
-    this.storeContacts(contactsListClone);
+    const headers = new HttpHeaders({'Content-Type': 'application/json'})
+    this.http.put("http://localhost:3000/contacts/" + originalContact.id, newContact, {headers: headers})
+      .subscribe(response => {
+        this.contacts[pos] = newContact;
+        let contactsListClone = this.contacts.slice();
+        // this.contactListChangedEvent.next(contactsListClone);
+        this.storeContacts(contactsListClone);
+      })
   }
 }

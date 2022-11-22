@@ -4,20 +4,19 @@ const sequenceGenerator = require("./sequenceGenerator");
 const Message = require("../models/message");
 
 router.get("/", (req, res, next) => {
-  Message.find().then((messages) => {
-    res
-      .status(200)
-      .json({
+  Message.find()
+    .then((messages) => {
+      res.status(200).json({
         message: "Messages fetched successfully!",
         messages: messages,
-      })
-      .catch((error) => {
-        res.status(500).json({
-          message: "An error has occurred",
-          error: error,
-        });
       });
-  });
+    })
+    .catch((error) => {
+      res.status(500).json({
+        message: "An error has occurred",
+        error: error,
+      });
+    });
 });
 
 router.post("/", (req, res, next) => {

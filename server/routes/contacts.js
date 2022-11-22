@@ -4,20 +4,20 @@ const sequenceGenerator = require("./sequenceGenerator");
 const Contact = require("../models/contact");
 
 router.get("/", (req, res, next) => {
-  Contact.find().then((contacts) => {
-    res
-      .status(200)
-      .json({
+  Contact.find()
+    .populate("group")
+    .then((contacts) => {
+      res.status(200).json({
         message: "Contacts fetched successfully!",
         contacts: contacts,
-      })
-      .catch((error) => {
-        res.status(500).json({
-          message: "An error has occurred",
-          error: error,
-        });
       });
-  });
+    })
+    .catch((error) => {
+      res.status(500).json({
+        message: "An error has occurred",
+        error: error,
+      });
+    });
 });
 
 router.post("/", (req, res, next) => {
