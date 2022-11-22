@@ -14,7 +14,7 @@ export class MessageService {
   maxMessageId: number;
 
   constructor(private http: HttpClient) {
-    this.messages = MOCKMESSAGES;
+    // this.messages = MOCKMESSAGES;
   }
 
   getMessages() {

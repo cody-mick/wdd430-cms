@@ -14,10 +14,12 @@ function SequenceGenerator() {
       });
     }
 
-    sequenceId = sequence?._id;
-    maxDocumentId = sequence?.maxDocumentId;
-    maxMessageId = sequence?.maxMessageId;
-    maxContactId = sequence?.maxContactId;
+    console.log(sequence);
+
+    sequenceId = sequence._id;
+    maxDocumentId = sequence.maxDocumentId;
+    maxMessageId = sequence.maxMessageId;
+    maxContactId = sequence.maxContactId;
   });
 }
 

@@ -22,7 +22,7 @@ const { use } = require("./server/routes/app");
 
 // establish connection to the mongo database
 mongoose.connect(
-  `mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@cluster0.dpz94eu.mongodb.net/?retryWrites=true&w=majority`,
+  `mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@cluster0.dpz94eu.mongodb.net/cms?retryWrites=true&w=majority`,
   { useNewUrlParser: true },
   (err, res) => {
     if (err) {

@@ -21,6 +21,7 @@ router.get("/", (req, res, next) => {
 
 router.post("/", (req, res, next) => {
   const maxDocumentId = sequenceGenerator.nextId("documents");
+  console.log("MAX DOC ID: ", maxDocumentId);
 
   const document = new Document({
     id: maxDocumentId,
