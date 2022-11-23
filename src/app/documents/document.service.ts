@@ -120,13 +120,16 @@ export class DocumentService {
     let pos = this.documents.indexOf(originalDocument);
     if (pos < 0) return;
     newDocument.id = originalDocument.id;
-    // newDocument._id = originalDocument._id;
-    const headers = new HttpHeaders({ 'Content-Type': 'application.json' });
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     console.log('NEW DOC: ', newDocument);
     this.http
-      .put(`http://localhost:3000/documents/${newDocument.id}`, newDocument, {
-        headers: headers,
-      })
+      .put(
+        `http://localhost:3000/documents/${originalDocument.id}`,
+        newDocument,
+        {
+          headers: headers,
+        }
+      )
       .subscribe((response) => {
         this.documents[pos] = newDocument;
         let documentsListClone = this.documents.slice();

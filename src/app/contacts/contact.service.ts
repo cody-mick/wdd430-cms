@@ -132,7 +132,7 @@ export class ContactService {
     newContact.id = originalContact.id;
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     this.http
-      .put('http://localhost:3000/contacts/' + originalContact.id, newContact, {
+      .put(`http://localhost:3000/contacts/${originalContact.id}`, newContact, {
         headers: headers,
       })
       .subscribe((response) => {
