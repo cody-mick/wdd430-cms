@@ -4,7 +4,7 @@ const sequenceGenerator = require("./sequenceGenerator");
 const Message = require("../models/message");
 
 router.get("/", (req, res, next) => {
-  Message.find()
+  Message.find({})
     .then((messages) => {
       res.status(200).json({
         message: "Messages fetched successfully!",
@@ -26,15 +26,17 @@ router.post("/", (req, res, next) => {
     id: maxDocumentId,
     subject: req.body.subject,
     msgText: req.body.msgText,
-    sender: req.body.sender,
+    // sender: req.body.sender
   });
+
+  console.log("NEW MESSAGE: ", req.body);
 
   message
     .save()
     .then((createdMessage) => {
       res.status(201).json({
-        statusMessage: "Message created successfully",
-        message: createdMessage,
+        message: "Message created successfully",
+        newMessage: createdMessage,
       });
     })
     .catch((error) => {

@@ -52,7 +52,7 @@ router.put("/:id", (req, res, next) => {
       document.description = req.body.description;
       document.url = req.body.url;
 
-      console.log(req.body);
+      console.log("REQUEST BODY: ", req.body);
       console.log("Document to update: ", document);
 
       Document.updateOne({ id: req.params.id }, document)

@@ -20,10 +20,12 @@ export class MessageService {
   getMessages() {
     // return this.messages.slice();
     return this.http
-      .get("http://localhost:3000/messages")
+      .get<{ message: string; messages: Message[] }>(
+        'http://localhost:3000/messages'
+      )
       .subscribe(
-        (messages: Message[]) => {
-          this.messages = [...messages];
+        (response) => {
+          this.messages = response.messages;
           this.maxMessageId = this.getMaxId();
           this.messages.sort((curr, next) => {
             if (curr < next) return -1;
@@ -67,15 +69,16 @@ export class MessageService {
   }
 
   addMessage(message: Message) {
-    if (!message) return
-    message.id = "";
-    const headers = new HttpHeaders({'Content-Type': 'application/json'})
-    this.http.post<{}>("http://localhost:3000/messages/" + message, {headers: headers})
-      .subscribe(responseData => {
+    if (!message) return;
+    message.id = '';
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    this.http
+      .post('http://localhost:3000/messages', message, { headers: headers })
+      .subscribe((responseData) => {
         this.messages.push(message);
         // this.messageChangedEvent.emit(this.messages.slice());
         this.storeMessages(this.messages.slice());
-      })
+      });
   }
 
   getMaxId(): number {

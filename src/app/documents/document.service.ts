@@ -23,10 +23,12 @@ export class DocumentService {
 
   getDocuments() {
     return this.http
-      .get('http://localhost:3000/documents')
-      .subscribe((documents: Document[]) => {
-        console.log(documents);
-        this.documents = [...documents];
+      .get<{ message: string; documents: Document[] }>(
+        'http://localhost:3000/documents'
+      )
+      .subscribe((response) => {
+        console.log(response.message);
+        this.documents = response.documents;
         this.maxDocumentId = this.getMaxId();
         this.documents.sort((curr, next) => {
           if (curr < next) return -1;
@@ -118,14 +120,13 @@ export class DocumentService {
     let pos = this.documents.indexOf(originalDocument);
     if (pos < 0) return;
     newDocument.id = originalDocument.id;
-    // newDocument._id = originalDocument._id
+    // newDocument._id = originalDocument._id;
     const headers = new HttpHeaders({ 'Content-Type': 'application.json' });
+    console.log('NEW DOC: ', newDocument);
     this.http
-      .put(
-        'http://localhost:3000/documents/' + originalDocument.id,
-        newDocument,
-        { headers: headers }
-      )
+      .put(`http://localhost:3000/documents/${newDocument.id}`, newDocument, {
+        headers: headers,
+      })
       .subscribe((response) => {
         this.documents[pos] = newDocument;
         let documentsListClone = this.documents.slice();
